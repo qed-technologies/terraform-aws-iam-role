@@ -10,7 +10,9 @@ module "iam_role" {
   max_session_duration  = 43200
 
   permissions_boundary_arn = concat(aws_iam_policy.MyPermissionsBoundary.*.arn, [""])[0]
-  trust_policy             = concat(data.aws_iam_policy_document.MyTrustPolicy.*.json, [""])[0]
+  trusted_identities = [
+    "arn:aws:iam::123456789012:root"
+  ]
 
   customer_managed_policies = [
     {

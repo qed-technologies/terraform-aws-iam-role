@@ -6,12 +6,18 @@ Creates an IAM role with role and trust policy attachments
 
 This module is designed to simplify and standardise the creation of AWS IAM Roles and the attachment of IAM Role Policies with Terraform
 
-## Role Policy Types
+## Commands
 
-This module supports:
-- Customer managed policies
-- AWS managed policies
-- Permissions boundaries
+```shell
+# runs a plan against the examples/full-implementation directory
+make plan 
+
+# Scan using Checkov
+make scan
+
+# Generate TF Docs
+make docs
+```
 
 ## Simple Implementation
 
@@ -45,7 +51,7 @@ See `examples/full-implementation`
 | path | Path under which the role resides | `string` | `"/"` | no |
 | permissions\_boundary\_arn | The ARN of the policy that is used to set the permissions boundary for the role | `string` | `""` | no |
 | tags | A map of tags to apply to the IAM role | `map(string)` | `{}` | no |
-| trust\_policy | The trust policy for this role | `string` | `""` | no |
+| trusted\_identities | A list of ARNs this role will trust | `list(string)` | n/a | yes |
 
 ## Outputs
 

@@ -5,7 +5,7 @@ resource "aws_iam_role" "this" {
   description = var.description
   path        = var.path
 
-  assume_role_policy    = var.trust_policy
+  assume_role_policy    = data.aws_iam_policy_document.trust_policy.json
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.permissions_boundary_arn
 
@@ -26,9 +26,31 @@ resource "aws_iam_instance_profile" "this" {
   role = aws_iam_role.this[0].name
 }
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Customer managed policies
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ---------------
+#  Trust policy
+# ---------------
+data "aws_iam_policy_document" "trust_policy" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = var.trusted_identities
+    }
+
+    actions = [
+      "sts:AssumeRole"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+}
+
+# ----------------------------
+#  Customer managed policies
+# ----------------------------
 resource "aws_iam_policy" "customer" {
   count = var.create && length(var.customer_managed_policies) > 0 ? length(var.customer_managed_policies) : 0
 
@@ -45,9 +67,9 @@ resource "aws_iam_role_policy_attachment" "customer" {
   policy_arn = aws_iam_policy.customer[count.index].arn
 }
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Amazon Managed policies
-#~~~~~~~~~~~~~~~~~~~~~~~~~~
+# --------------------------
+#  Amazon Managed policies
+# --------------------------
 data "aws_iam_policy" "amazon" {
   count = var.create && length(var.amazon_managed_policy_arns) > 0 ? length(var.amazon_managed_policy_arns) : 0
   arn   = var.amazon_managed_policy_arns[count.index]
