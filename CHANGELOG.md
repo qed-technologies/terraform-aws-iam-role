@@ -1,5 +1,11 @@
 # Release Notes
 
+## v1.2.0 - 2020-12-09
+
+### Bug Fixes
+
+- Removed `resources` attribute from trust policy
+
 ## v1.1.0 - 2020-12-07
 
 ### New Features
