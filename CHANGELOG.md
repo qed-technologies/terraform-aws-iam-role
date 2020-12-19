@@ -1,5 +1,11 @@
 # Release Notes
 
+## v2.0.0 - 2020-12-19
+
+### Breaking Changes
+
+- Renamed `amazon_managed_policy_arns` to `managed_policy_arns` to better indicate the values that can be accepted
+
 ## v1.2.0 - 2020-12-09
 
 ### Bug Fixes

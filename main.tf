@@ -63,17 +63,12 @@ resource "aws_iam_role_policy_attachment" "customer" {
   policy_arn = aws_iam_policy.customer[count.index].arn
 }
 
-# --------------------------
-#  Amazon Managed policies
-# --------------------------
-data "aws_iam_policy" "amazon" {
-  count = var.create && length(var.amazon_managed_policy_arns) > 0 ? length(var.amazon_managed_policy_arns) : 0
-  arn   = var.amazon_managed_policy_arns[count.index]
-}
-
-resource "aws_iam_role_policy_attachment" "amazon" {
-  count = var.create && length(var.amazon_managed_policy_arns) > 0 ? length(var.amazon_managed_policy_arns) : 0
+# ----------------------
+#  Managed policy ARNs
+# ----------------------
+resource "aws_iam_role_policy_attachment" "managed_policy" {
+  count = var.create && length(var.managed_policy_arns) > 0 ? length(var.managed_policy_arns) : 0
 
   role       = aws_iam_role.this[0].name
-  policy_arn = data.aws_iam_policy.amazon[count.index].arn
+  policy_arn = var.managed_policy_arns[count.index]
 }

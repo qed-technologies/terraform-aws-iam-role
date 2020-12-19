@@ -2,6 +2,8 @@
 
 Creates an IAM role with role and trust policy attachments
 
+[![Latest release](https://img.shields.io/github/v/release/qed-technologies/terraform-aws-iam-role)](https://github.com/qed-technologies/terraform-aws-iam-role/releases)
+
 ## Purpose
 
 This module is designed to simplify and standardise the creation of AWS IAM Roles and the attachment of IAM Role Policies with Terraform
@@ -40,12 +42,12 @@ See `examples/full-implementation`
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| amazon\_managed\_policy\_arns | A list of AWS Managed Role Policy ARNs | `list(string)` | `[]` | no |
 | create | Controls resource creation | `bool` | `false` | no |
 | customer\_managed\_policies | A list of objects defining role policies to be attached to the IAM role | <pre>list(object({<br>    name        = string<br>    description = string<br>    policy      = string<br>  }))</pre> | `[]` | no |
 | description | A description for the IAM role | `string` | `""` | no |
 | force\_detach\_policies | Forces the policies to be detached before destroying the role | `bool` | `false` | no |
 | is\_instance\_profile | Determines if the IAM role will be associated to an IAM instance profile | `bool` | `false` | no |
+| managed\_policy\_arns | A list of Managed Role Policy ARNs | `list(string)` | `[]` | no |
 | max\_session\_duration | The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour (3600 seconds) to 12 hours (43200) | `number` | `3600` | no |
 | name | The name of the role | `string` | `""` | no |
 | path | Path under which the role resides | `string` | `"/"` | no |

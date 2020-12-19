@@ -16,9 +16,9 @@ variable "is_instance_profile" {
 # -------
 #  Role
 # -------
-variable "amazon_managed_policy_arns" {
+variable "managed_policy_arns" {
   type        = list(string)
-  description = "A list of AWS Managed Role Policy ARNs"
+  description = "A list of Managed Role Policy ARNs"
   default     = []
 }
 

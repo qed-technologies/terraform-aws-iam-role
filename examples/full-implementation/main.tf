@@ -22,7 +22,7 @@ module "iam_role" {
     }
   ]
 
-  amazon_managed_policy_arns = [
+  managed_policy_arns = [
     "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
     "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
   ]
