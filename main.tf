@@ -1,9 +1,16 @@
+locals {
+  # Multi-step process to ensure path is prefixed and 
+  # suffixed with a "/"
+  path_first_check = substr(var.path, 0, 1) != "/" ? "/${var.path}" : var.path
+  path_final       = substr(local.path_first_check, length(local.path_first_check) - 1, 1) != "/" ? "${local.path_first_check}/" : local.path_first_check
+}
+
 resource "aws_iam_role" "this" {
   count = var.create ? 1 : 0
 
   name        = var.name
   description = var.description
-  path        = var.path
+  path        = local.path_final
 
   assume_role_policy    = data.aws_iam_policy_document.trust_policy.json
   force_detach_policies = var.force_detach_policies

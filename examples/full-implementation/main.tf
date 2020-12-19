@@ -6,6 +6,7 @@ module "iam_role" {
   is_instance_profile   = true
   name                  = "MyAwesomeIAMRole"
   description           = "IAM Role to do something"
+  path                  = "test"
   force_detach_policies = true
   max_session_duration  = 43200
 

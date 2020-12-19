@@ -1,5 +1,11 @@
 # Release Notes
 
+## v2.1.0 - 2020-12-19
+
+### Bug Fixes
+
+- Handle situation when client doesn't supply a correctly formatted `path`
+
 ## v2.0.0 - 2020-12-19
 
 ### Breaking Changes
