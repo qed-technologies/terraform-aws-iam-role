@@ -1,5 +1,11 @@
 # Release Notes
 
+## v2.1.1 - 2020-12-24
+
+### Enhancements
+
+- Support Terraform v0.14.x
+
 ## v2.1.0 - 2020-12-19
 
 ### Bug Fixes
