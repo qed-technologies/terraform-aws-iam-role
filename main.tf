@@ -30,6 +30,7 @@ resource "aws_iam_instance_profile" "this" {
   count = var.create && var.is_instance_profile ? 1 : 0
 
   name = var.name
+  path = local.path_final
   role = aws_iam_role.this[0].name
 }
 
