@@ -1,5 +1,11 @@
 # Release Notes
 
+## v2.1.2 - 2020-12-26
+
+### Bug Fixes
+
+- Add correctly formatted `local.path` to customer managed policies
+
 ## v2.1.1 - 2020-12-24
 
 ### Enhancements

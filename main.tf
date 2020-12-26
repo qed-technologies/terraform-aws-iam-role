@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "trust_policy" {
 resource "aws_iam_policy" "customer" {
   count = var.create && length(var.customer_managed_policies) > 0 ? length(var.customer_managed_policies) : 0
 
-  path        = var.path
+  path        = local.path_final
   name        = lookup(var.customer_managed_policies[count.index], "name", null)
   description = lookup(var.customer_managed_policies[count.index], "description", null)
   policy      = lookup(var.customer_managed_policies[count.index], "policy", null)
