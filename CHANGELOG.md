@@ -1,5 +1,11 @@
 # Release Notes
 
+## v2.1.4 - 2021-01-08
+
+### Enhancements
+
+- Add `sts:TagSession` permission to assume role policy, as this is required when assuming a role using the AWS Assume Role GitHub Action
+
 ## v2.1.3 - 2020-12-26
 
 ### Bug Fixes
