@@ -47,7 +47,8 @@ data "aws_iam_policy_document" "trust_policy" {
     }
 
     actions = [
-      "sts:AssumeRole"
+      "sts:AssumeRole",
+      "sts:TagSession"
     ]
   }
 }
