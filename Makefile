@@ -1,9 +1,11 @@
+TF_VERSION				:= 1.1.0
+FILE_PLAN				:= plan.tfplan
+DIR_TF					:= examples/full-implementation
+
 AWS_PROFILE				:= qed-master
 AWS_REGION				:= eu-west-2
-DIR_TERRAFORM			:= examples/full-implementation
 FILE_CREDENTIALS_DOCKER	:= /tmp/credentials
 FILE_CREDENTIALS_HOST	:= $(HOME)/.aws/credentials
-TF_VERSION				:= 0.14.3
 TF_IMAGE				:= hashicorp/terraform:$(TF_VERSION)
 TF_DOCS_VERSION			:= 0.10.1
 TF_DOCS_IMAGE			:= quay.io/terraform-docs/terraform-docs:$(TF_DOCS_VERSION)
@@ -19,20 +21,7 @@ ifeq (1,$(DISABLE_COLOR))
 	NO_COLOR	:= -no-color
 endif
 
-TF_CMD = docker run \
-			--rm \
-			--user $(shell id -u) \
-			--mount type=bind,source="$(shell pwd)",destination=$(TF_BIND_DIR) \
-			-w $(TF_BIND_DIR) \
-			--env AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) \
-			--env AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) \
-			--env TF_DATA_DIR=$(TF_BIND_DIR)/.terraform \
-			--env AWS_PROFILE=$(AWS_PROFILE) \
-			--env AWS_SHARED_CREDENTIALS_FILE=$(FILE_CREDENTIALS_DOCKER) \
-			--env AWS_SDK_LOAD_CONFIG=1 \
-			--env AWS_DEFAULT_REGION=$(AWS_REGION) \
-			$(MOUNT_CREDENTIALS_FILE) \
-			$(TF_IMAGE)
+TF_CMD = terraform -chdir=$(DIR_TF)
 
 TF_CHECKOV_CMD = docker run \
 					--rm \
@@ -42,13 +31,7 @@ TF_CHECKOV_CMD = docker run \
 					-d $(TF_BIND_DIR)
 
 docs:
-	docker run \
-		--rm \
-		--user $(shell id -u) \
-		--mount type=bind,source="$(shell pwd)",destination=$(TF_BIND_DIR) \
-		-w $(TF_BIND_DIR) \
-		$(TF_DOCS_IMAGE) \
-		markdown .
+	terraform-docs markdown table --output-file README.md --output-mode inject .
 
 install_shellcheck:
 	@echo "Installing shellcheck..."
@@ -59,9 +42,7 @@ install_shellcheck:
 
 
 init:
-	$(TF_CMD) init \
-		$(NO_COLOR) \
-		$(DIR_TERRAFORM)
+	$(TF_CMD) init
 
 check-fmt:
 	$(TF_CMD) fmt -check .
@@ -72,8 +53,7 @@ fmt:
 
 plan:
 	$(TF_CMD) plan \
-		$(NO_COLOR) \
-		$(DIR_TERRAFORM)
+		-out=$(FILE_PLAN)
 
 scan:
 	$(TF_CHECKOV_CMD)

@@ -1,5 +1,11 @@
 # Release Notes
 
+## v3.0.0 - 2022-02-20
+
+### Updated
+- Terraform version to `1.1.0`
+- Terraform AWS Provider to `4.0.0`
+
 ## v2.1.4 - 2021-01-08
 
 ### Enhancements
