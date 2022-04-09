@@ -37,13 +37,18 @@ resource "aws_iam_instance_profile" "this" {
 # ---------------
 #  Trust policy
 # ---------------
-data "aws_iam_policy_document" "trust_policy" {
+data "aws_iam_policy_document" "trust_policy_identities" {
   statement {
     effect = "Allow"
 
     principals {
       type        = "AWS"
       identifiers = var.trusted_identities
+    }
+
+    principals {
+      type        = "Service"
+      identifiers = var.trusted_services
     }
 
     actions = [

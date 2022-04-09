@@ -77,4 +77,11 @@ variable "tags" {
 variable "trusted_identities" {
   type        = list(string)
   description = "A list of ARNs this role will trust"
+  default     = []
+}
+
+variable "trusted_services" {
+  type        = list(string)
+  description = "A list of AWS Services this role will trust"
+  default     = []
 }
