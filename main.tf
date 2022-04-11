@@ -37,7 +37,7 @@ resource "aws_iam_instance_profile" "this" {
 # ---------------
 #  Trust policy
 # ---------------
-data "aws_iam_policy_document" "trust_policy_identities" {
+data "aws_iam_policy_document" "trust_policy" {
   statement {
     effect = "Allow"
 
