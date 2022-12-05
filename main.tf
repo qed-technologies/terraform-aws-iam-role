@@ -34,25 +34,6 @@ resource "aws_iam_instance_profile" "this" {
   role = aws_iam_role.this[0].name
 }
 
-# ---------------
-#  Trust policy
-# ---------------
-data "aws_iam_policy_document" "trust_policy" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      type        = "AWS"
-      identifiers = var.trusted_identities
-    }
-
-    actions = [
-      "sts:AssumeRole",
-      "sts:TagSession"
-    ]
-  }
-}
-
 # ----------------------------
 #  Customer managed policies
 # ----------------------------

@@ -76,5 +76,12 @@ variable "tags" {
 
 variable "trusted_identities" {
   type        = list(string)
-  description = "A list of ARNs this role will trust"
+  description = "A list of ARNs this role will trust."
+  default     = []
+}
+
+variable "trusted_services" {
+  type        = list(string)
+  description = "A list of AWS Service Names trusted by the role.  See: https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html for the list of endpoint names"
+  default     = []
 }
