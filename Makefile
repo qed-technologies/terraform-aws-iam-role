@@ -1,4 +1,4 @@
-TF_VERSION				:= 1.1.0
+TF_VERSION				:= 1.3.6
 FILE_PLAN				:= plan.tfplan
 DIR_TF					:= examples/full-implementation
 
