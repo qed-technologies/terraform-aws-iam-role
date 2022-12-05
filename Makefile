@@ -1,4 +1,4 @@
-TF_VERSION				:= 1.1.0
+TF_VERSION				:= 1.3.6
 FILE_PLAN				:= plan.tfplan
 DIR_TF					:= examples/full-implementation
 
@@ -9,7 +9,7 @@ FILE_CREDENTIALS_HOST	:= $(HOME)/.aws/credentials
 TF_IMAGE				:= hashicorp/terraform:$(TF_VERSION)
 TF_DOCS_VERSION			:= 0.10.1
 TF_DOCS_IMAGE			:= quay.io/terraform-docs/terraform-docs:$(TF_DOCS_VERSION)
-TF_CHECKOV_VERSION		:= 1.0.625
+TF_CHECKOV_VERSION		:= 2.2.114
 TF_CHECKOV_IMAGE		:= bridgecrew/checkov:$(TF_CHECKOV_VERSION)
 TF_BIND_DIR				:= /terraform
 SHELLCHECK_URL			:= https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz
